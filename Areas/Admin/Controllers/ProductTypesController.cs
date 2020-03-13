@@ -18,6 +18,7 @@ namespace Online_Shop.Areas.Admin.Controllers
             _db = db;
         }
 
+        ProductTypes ProductTypes = new ProductTypes();
         public IActionResult Index()
         {
             var data = _db.ProductType.ToList();
@@ -27,24 +28,42 @@ namespace Online_Shop.Areas.Admin.Controllers
 
         //Create GET Method
         [HttpGet]
-        public ActionResult Create()
+        public ActionResult Create(int? id)
         {
-            return View();
+            if (id == null)
+            {
+                return View(new ProductTypes());
+            }
+            var productType = _db.ProductType.Find(id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+            return View(productType);
         }
 
         //Create Post Method
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create (ProductTypes productTypes)
+        public async Task<ActionResult> Create(ProductTypes ProductTypes)
         {
             if (ModelState.IsValid)
             {
-                _db.ProductType.Add(productTypes);
+                if (ProductTypes.Id == 0)
+                {
+                    _db.ProductType.Add(ProductTypes);
+                }
+                else
+                {
+                    _db.ProductType.Update(ProductTypes);
+
+                }
+
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(productTypes);
+            return View(ProductTypes);
         }
     }
 }

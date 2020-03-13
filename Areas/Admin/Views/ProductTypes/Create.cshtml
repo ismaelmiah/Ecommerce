@@ -3,9 +3,13 @@
     ViewData["Title"] = "Create";
 }
 
-<h1>Create Product Type</h1>
+<h1>@(Model.Id == 0 ? "Create": "Edit") Product Type</h1>
 
 <form asp-action="Create" method="post">
+    @if(Model.Id != 0 )
+    {
+        <input type="hidden" asp-for="Id" />
+    }
     <div class="p-4 rounded border">
         <div asp-validation-summary="ModelOnly" class="text-danger">
 
@@ -20,7 +24,7 @@
             <span asp-validation-for="ProductType" class="text-danger"></span>
         </div>
         <div class="form-group">
-            <input type="submit" value="Save" class="btn btn-primary" />
+            <button class="btn btn-primary"> @(Model.Id != 0 ? "Update" : "Save")</button>
             <a asp-action="Index" class="btn btn-success">Back to List</a>
         </div>
     </div>
