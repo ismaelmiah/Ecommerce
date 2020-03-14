@@ -1,30 +1,30 @@
-﻿@model IEnumerable<Online_Shop.Models.ProductTypes>
+﻿@model IEnumerable<Online_Shop.Models.SpecialTags>
 @{
     ViewData["Title"] = "Index";
 }
 <br />
 <div class="row">
     <div class="col-6">
-        <h1 class="text-info">Product Type</h1>
+        <h1 class="text-info">Special Tag</h1>
     </div>
     <div class="col-6 text-right">
-        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i> &nbsp; New Product Type</a>
+        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i> &nbsp; New Special Tag</a>
     </div>
 </div>
 
 <div>
     <table class="table table-striped border">
         <tr class="table-info">
-            <th>Product Type</th>
+            <th>Special Tag</th>
             <th></th>
             <th></th>
         </tr>
         @foreach (var item in Model)
         {
             <tr>
-                <td>@item.ProductType</td>
+                <td>@item.SpecialTag</td>
                 <td>
-                    <partial name="_ButtonProductTypePartial" model="@item.Id" />
+                    <partial name="_ButtonSpecialTagPartial" model="@item.Id" />
                 </td>
             </tr>
         }

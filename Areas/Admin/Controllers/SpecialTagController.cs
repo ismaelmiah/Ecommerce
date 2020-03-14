@@ -9,19 +9,19 @@ using Online_Shop.Models;
 namespace Online_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ProductTypesController : Controller
+    public class SpecialTagController : Controller
     {
         private readonly ApplicationDbContext _db;
 
-        public ProductTypesController(ApplicationDbContext db)
+        public SpecialTagController(ApplicationDbContext db)
         {
             _db = db;
         }
 
-        //ProductTypes ProductTypes = new ProductTypes();
+        //SpecialTags SpecialTags = new SpecialTags();
         public IActionResult Index()
         {
-            var data = _db.ProductType.ToList();
+            var data = _db.SpecialTags.ToList();
             return View(data);
         }
 
@@ -33,39 +33,39 @@ namespace Online_Shop.Areas.Admin.Controllers
             if (id == null)
             {
                 // Create
-                return View(new ProductTypes());
+                return View(new SpecialTags());
             }
             //Update
-            var productType = _db.ProductType.Find(id);
-            if (productType == null)
+            var SpecialTg = _db.SpecialTags.Find(id);
+            if (SpecialTg == null)
             {
                 return NotFound();
             }
-            return View(productType);
+            return View(SpecialTg);
         }
 
         //Create Post Method
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ProductTypes ProductTypes)
+        public async Task<ActionResult> Create(SpecialTags SpecialTags)
         {
             if (ModelState.IsValid)
             {
-                if (ProductTypes.Id == 0)
+                if (SpecialTags.Id == 0)
                 {
-                    _db.ProductType.Add(ProductTypes);
+                    _db.SpecialTags.Add(SpecialTags);
                 }
                 else
                 {
-                    _db.ProductType.Update(ProductTypes);
+                    _db.SpecialTags.Update(SpecialTags);
 
                 }
 
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ProductTypes);
+            return View(SpecialTags);
         }
 
         //Details Page
@@ -73,12 +73,12 @@ namespace Online_Shop.Areas.Admin.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null) return NotFound();
-            var productType = _db.ProductType.Find(id);
-            if (productType == null)
+            var SpecialTg = _db.SpecialTags.Find(id);
+            if (SpecialTg == null)
             {
                 return NotFound();
             }
-            return View(productType);
+            return View(SpecialTg);
         }
 
         //Delete Get Method
@@ -86,34 +86,34 @@ namespace Online_Shop.Areas.Admin.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
-            var productType = _db.ProductType.Find(id);
-            if (productType == null)
+            var SpecialTg = _db.SpecialTags.Find(id);
+            if (SpecialTg == null)
             {
                 return NotFound();
             }
-            return View(productType);
+            return View(SpecialTg);
         }
 
         //Delete Post Method
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int?Id, ProductTypes ProductTypes)
+        public async Task<ActionResult> Delete(int? Id, SpecialTags SpecialTags)
         {
             if (Id == null) return NotFound();
-            if (Id != ProductTypes.Id) return NotFound();
-            var productType = _db.ProductType.Find(Id);
-            if (productType == null)
+            if (Id != SpecialTags.Id) return NotFound();
+            var SpecialTg = _db.SpecialTags.Find(Id);
+            if (SpecialTg == null)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
-                _db.Remove(productType);
+                _db.Remove(SpecialTg);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ProductTypes);
+            return View(SpecialTags);
         }
 
     }
