@@ -159,3 +159,5 @@ C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admi
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewStart.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ButtonPartial.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\ProductTypes\Create.cshtml.g.cs
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\ProductTypes\Details.cshtml.g.cs
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\ProductTypes\Delete.cshtml.g.cs

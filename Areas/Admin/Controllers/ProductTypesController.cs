@@ -32,8 +32,10 @@ namespace Online_Shop.Areas.Admin.Controllers
         {
             if (id == null)
             {
+                // Create
                 return View(new ProductTypes());
             }
+            //Update
             var productType = _db.ProductType.Find(id);
             if (productType == null)
             {
@@ -65,5 +67,54 @@ namespace Online_Shop.Areas.Admin.Controllers
             }
             return View(ProductTypes);
         }
+
+        //Details Page
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            if (id == null) return NotFound();
+            var productType = _db.ProductType.Find(id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+            return View(productType);
+        }
+
+        //Delete Get Method
+        [HttpGet]
+        public ActionResult Delete(int? id)
+        {
+            if (id == null) return NotFound();
+            var productType = _db.ProductType.Find(id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+            return View(productType);
+        }
+
+        //Delete Post Method
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Delete(int?Id, ProductTypes ProductTypes)
+        {
+            if (Id == null) return NotFound();
+            if (Id != ProductTypes.Id) return NotFound();
+            var productType = _db.ProductType.Find(Id);
+            if (productType == null)
+            {
+                return NotFound();
+            }
+            if (ModelState.IsValid)
+            {
+                _db.Remove(productType);
+                await _db.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+            }
+            return View(ProductTypes);
+        }
+
     }
 }
