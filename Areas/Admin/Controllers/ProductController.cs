@@ -9,19 +9,18 @@ using Online_Shop.Models;
 namespace Online_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    public class ProductTypesController : Controller
+    public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;
-
-        public ProductTypesController(ApplicationDbContext db)
+        public ProductController(ApplicationDbContext db)
         {
             _db = db;
         }
 
-        //ProductTypes ProductTypes = new ProductTypes();
+        //Product Product = new Product();
         public IActionResult Index()
         {
-            var data = _db.ProductType.ToList();
+            var data = _db.Product.ToList();
             return View(data);
         }
 
@@ -33,41 +32,41 @@ namespace Online_Shop.Areas.Admin.Controllers
             if (id == null)
             {
                 // Create
-                return View(new ProductTypes());
+                return View(new Products());
             }
             //Update
-            var productType = _db.ProductType.Find(id);
-            if (productType == null)
+            var Product = _db.Product.Find(id);
+            if (Product == null)
             {
                 return NotFound();
             }
-            return View(productType);
+            return View(Product);
         }
 
         //Create Post Method
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(ProductTypes ProductTypes)
+        public async Task<ActionResult> Create(Products Product)
         {
             if (ModelState.IsValid)
             {
-                if (ProductTypes.Id == 0)
+                if (Product.Id == 0)
                 {
-                    TempData["save"] = "Product Type has been Saved";
-                    _db.ProductType.Add(ProductTypes);
+                    TempData["save"] = "Product has been Saved";
+                    _db.Product.Add(Product);
                 }
                 else
                 {
                     TempData["save"] = "Update";
-                    _db.ProductType.Update(ProductTypes);
+                    _db.Product.Update(Product);
 
                 }
 
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ProductTypes);
+            return View(Product);
         }
 
         //Details Page
@@ -75,12 +74,12 @@ namespace Online_Shop.Areas.Admin.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null) return NotFound();
-            var productType = _db.ProductType.Find(id);
-            if (productType == null)
+            var Product = _db.Product.Find(id);
+            if (Product == null)
             {
                 return NotFound();
             }
-            return View(productType);
+            return View(Product);
         }
 
         //Delete Get Method
@@ -88,35 +87,35 @@ namespace Online_Shop.Areas.Admin.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
-            var productType = _db.ProductType.Find(id);
-            if (productType == null)
+            var Product = _db.Product.Find(id);
+            if (Product == null)
             {
                 return NotFound();
             }
-            return View(productType);
+            return View(Product);
         }
 
         //Delete Post Method
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Delete(int?Id, ProductTypes ProductTypes)
+        public async Task<ActionResult> Delete(int? Id, Products Products)
         {
             if (Id == null) return NotFound();
-            if (Id != ProductTypes.Id) return NotFound();
-            var productType = _db.ProductType.Find(Id);
-            if (productType == null)
+            if (Id != Products.Id) return NotFound();
+            var Product = _db.Product.Find(Id);
+            if (Product == null)
             {
                 return NotFound();
             }
             if (ModelState.IsValid)
             {
                 TempData["save"] = "Delete";
-                _db.Remove(productType);
+                _db.Remove(Product);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(ProductTypes);
+            return View(Product);
         }
 
     }

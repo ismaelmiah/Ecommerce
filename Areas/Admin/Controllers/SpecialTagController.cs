@@ -54,10 +54,12 @@ namespace Online_Shop.Areas.Admin.Controllers
             {
                 if (SpecialTags.Id == 0)
                 {
+                    TempData["save"] = "Special Tag has been Saved";
                     _db.SpecialTags.Add(SpecialTags);
                 }
                 else
                 {
+                    TempData["save"] = "Update";
                     _db.SpecialTags.Update(SpecialTags);
 
                 }
@@ -109,6 +111,7 @@ namespace Online_Shop.Areas.Admin.Controllers
             }
             if (ModelState.IsValid)
             {
+                TempData["save"] = "Delete";
                 _db.Remove(SpecialTg);
                 await _db.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));

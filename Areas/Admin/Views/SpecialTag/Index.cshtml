@@ -32,4 +32,20 @@
 </div>
 
 
+@section Scripts{
+    <script type="text/javascript">
+        $(function () {
+            var save = '@TempData["save"]'
+            if (save != null && save != '') {
+                if (save == "Delete") {
+                    alertify.error('Special Tag has been Deleted');
+                }
+                else if (save == "Update") {
+                    alertify.warning('Special Tag has been Updated');
+                }
+                else alertify.success(save);
+            }
 
+        })
+    </script>
+}
