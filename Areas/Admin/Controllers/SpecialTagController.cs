@@ -52,6 +52,13 @@ namespace Online_Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var searchProductType = _db.SpecialTags.FirstOrDefault(
+                    x => x.SpecialTag == SpecialTags.SpecialTag);
+                if (searchProductType != null)
+                {
+                    ViewBag.message = "This Tag is Already Exists";
+                    return View(SpecialTags);
+                }
                 if (SpecialTags.Id == 0)
                 {
                     TempData["save"] = "Special Tag has been Saved";

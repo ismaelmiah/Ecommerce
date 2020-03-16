@@ -30,6 +30,17 @@ namespace Online_Shop.Areas.Admin.Controllers
             var data = _db.Product.Include(x=> x.SpecialTags).Include(x=>x.ProductTypes).ToList();
             return View(data);
         }
+        
+        [HttpPost]
+        public IActionResult Index(decimal? lowPrice, decimal? highPrice)
+        {
+            var products = _db.Product.Include(x => x.SpecialTags).Include(x => x.ProductTypes).Where(x=>x.Price>=lowPrice && x.Price<=highPrice).ToList();
+            if(lowPrice==null || highPrice == null)
+            {
+                products = _db.Product.Include(x => x.SpecialTags).Include(x => x.ProductTypes).ToList();
+            }
+            return View(products);
+        }
 
 
         //Create GET Method
@@ -62,6 +73,14 @@ namespace Online_Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var searchProduct = _db.Product.FirstOrDefault(x=> x.Name == Product.Name); 
+                if (searchProduct != null)
+                {
+                    ViewBag.message = "This Product is Already Exists";
+                    ViewData["ProductTypeId"] = new SelectList(_db.ProductType.ToList(), "Id", "ProductType");
+                    ViewData["SpecialTagId"] = new SelectList(_db.SpecialTags.ToList(), "Id", "SpecialTag");
+                    return View(Product);
+                }
                 if (Image != null)
                 {
                     string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");

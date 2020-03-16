@@ -13,6 +13,22 @@
     </div>
 </div>
 
+<form asp-action="Index" method="post">
+    <div class="row form-group">
+        <div class="col-3">
+            <input name="lowPrice" placeholder="Price" type="number" class="form-control" />
+        </div>
+        <div class="col-3">
+            <input name="highPrice" placeholder="Between" type="number" class="form-control" />
+        </div>
+        <div class="col-3">
+            <input type="submit" value="Search" class="btn btn-success" />
+        </div>
+        <div class="col-3">
+        </div>
+    </div>
+</form>
+
 <div>
     <table class="table table-striped border">
         <tr class="table-info">

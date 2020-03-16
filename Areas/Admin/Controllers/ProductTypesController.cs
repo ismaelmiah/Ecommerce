@@ -52,6 +52,12 @@ namespace Online_Shop.Areas.Admin.Controllers
         {
             if (ModelState.IsValid)
             {
+                var searchProductType= _db.ProductType.FirstOrDefault(x => x.ProductType == ProductTypes.ProductType);
+                if (searchProductType != null)
+                {
+                    ViewBag.message = "This Product Type is Already Exists";
+                    return View(ProductTypes);
+                }
                 if (ProductTypes.Id == 0)
                 {
                     TempData["save"] = "Product Type has been Saved";
