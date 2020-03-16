@@ -44,7 +44,8 @@ namespace Online_Shop.Areas.Admin.Controllers
                 return View(new Products());
             }
             //Update
-            var Product = _db.Product.Find(id);
+            var Product = _db.Product.Include(x => x.SpecialTags).Include(x => x.ProductTypes).
+                FirstOrDefault(x => x.Id == id);
             if (Product == null)
             {
                 return NotFound();
@@ -57,16 +58,22 @@ namespace Online_Shop.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create(Products Product, IFormFile photo)
+        public async Task<ActionResult> Create(Products Product, IFormFile Image)
         {
             if (ModelState.IsValid)
             {
-                if (photo != null)
+                if (Image != null)
                 {
-                    var name = Path.Combine(hostingEnvironment.WebRootPath + "/images", 
-                        Path.GetFileName(photo.FileName));
-                    await photo.CopyToAsync(new FileStream(name, FileMode.Create));
-                    Product.Image = "images/" + photo.FileName;
+                    string uploadsFolder = Path.Combine(hostingEnvironment.WebRootPath, "images");
+                    var uniqueFileName = Guid.NewGuid().ToString() + "_" + Image.FileName;
+                    string filePath = Path.Combine(uploadsFolder, uniqueFileName);
+                    using var fileStream = new FileStream(filePath, FileMode.Create);
+                    Image.CopyTo(fileStream);
+                    Product.Image = uniqueFileName;
+                }
+                if (Image == null)
+                {
+                    Product.Image = "noPhotoFound.png";
                 }
                 if (Product.Id == 0)
                 {
@@ -91,7 +98,8 @@ namespace Online_Shop.Areas.Admin.Controllers
         public ActionResult Details(int? id)
         {
             if (id == null) return NotFound();
-            var Product = _db.Product.Find(id);
+            var Product = _db.Product.Include(x => x.SpecialTags).Include(x => x.ProductTypes).
+                FirstOrDefault(x => x.Id == id);
             if (Product == null)
             {
                 return NotFound();
@@ -104,7 +112,8 @@ namespace Online_Shop.Areas.Admin.Controllers
         public ActionResult Delete(int? id)
         {
             if (id == null) return NotFound();
-            var Product = _db.Product.Find(id);
+            var Product = _db.Product.Include(x => x.SpecialTags).Include(x => x.ProductTypes).
+                FirstOrDefault(x => x.Id == id);
             if (Product == null)
             {
                 return NotFound();
@@ -120,7 +129,8 @@ namespace Online_Shop.Areas.Admin.Controllers
         {
             if (Id == null) return NotFound();
             if (Id != Products.Id) return NotFound();
-            var Product = _db.Product.Find(Id);
+            var Product = _db.Product.Include(x => x.SpecialTags).Include(x => x.ProductTypes).
+                FirstOrDefault(x => x.Id == Id);
             if (Product == null)
             {
                 return NotFound();
