@@ -30,36 +30,45 @@
 </form>
 
 <div>
-    <table class="table table-striped border">
-        <tr class="table-info">
-            <th>@Html.DisplayNameFor(x => x.Name)</th>
-            <th>@Html.DisplayNameFor(x => x.Price)</th>
-            <th>@Html.DisplayNameFor(x => x.ProductColor)</th>
-            <th>@Html.DisplayNameFor(x => x.ProductTypeId)</th>
-            <th>@Html.DisplayNameFor(x => x.SpecialTagId)</th>
-            <th>@Html.DisplayNameFor(x => x.isAvailable)</th>
-            <th></th>
-            <th></th>
-        </tr>
-        @foreach (var item in Model)
-        {
-    <tr>
-        <td>@item.Name</td>
-        <td>@item.Price</td>
-        <td>@item.ProductColor</td>
-        <td>@item.ProductTypes.ProductType</td>
-        <td>@item.SpecialTags.SpecialTag</td>
-        <td>@item.isAvailable</td>
-        <td>
-            <partial name="_ButtonProductPartial" model="@item.Id" />
-        </td>
-    </tr>
-        }
+    <table class="table table-striped border" id="DT_load">
+        <thead>
+            <tr class="table-info">
+                <th>@Html.DisplayNameFor(x => x.Name)</th>
+                <th>@Html.DisplayNameFor(x => x.Price)</th>
+                <th>@Html.DisplayNameFor(x => x.ProductColor)</th>
+                <th>@Html.DisplayNameFor(x => x.ProductTypeId)</th>
+                <th>@Html.DisplayNameFor(x => x.SpecialTagId)</th>
+                <th>@Html.DisplayNameFor(x => x.isAvailable)</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Price</td>
+                    <td>@item.ProductColor</td>
+                    <td>@item.ProductTypes.ProductType</td>
+                    <td>@item.SpecialTags.SpecialTag</td>
+                    <td>@item.isAvailable</td>
+                    <td>
+                        <partial name="_ButtonProductPartial" model="@item.Id" />
+                    </td>
+                </tr>
+            }
+        </tbody>
+        
     </table>
 </div>
 
 @section Scripts{
     <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DT_load').DataTable();
+        });
         $(function () {
             var save = '@TempData["save"]'
             if (save != null && save != '') {
