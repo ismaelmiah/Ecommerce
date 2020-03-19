@@ -28,6 +28,20 @@ namespace Online_Shop.Controllers
             return View(data);
         }
 
+        //Details Page
+        [HttpGet]
+        public ActionResult Details(int? id)
+        {
+            if (id == null) return NotFound();
+            var Product = _db.Product.Include(x => x.SpecialTags).Include(x => x.ProductTypes).
+                FirstOrDefault(x => x.Id == id);
+            if (Product == null)
+            {
+                return NotFound();
+            }
+            return View(Product);
+        }
+
         public IActionResult Privacy()
         {
             return View();
