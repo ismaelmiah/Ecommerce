@@ -31,7 +31,7 @@ namespace Online_Shop
 
             services.AddSession(options =>
             {
-                options.IdleTimeout = TimeSpan.FromSeconds(10);
+                options.IdleTimeout = TimeSpan.FromMinutes(10);
                 options.Cookie.HttpOnly = true;
                 options.Cookie.IsEssential = true;
             });
@@ -64,10 +64,10 @@ namespace Online_Shop
 
             app.UseRouting();
 
-            app.UseHttpContextItemsMiddleware();
-
             app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

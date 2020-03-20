@@ -1,4 +1,16 @@
-﻿<!DOCTYPE html>
+﻿@using Microsoft.AspNetCore.Http
+@using Online_Shop.Utility
+@inject IHttpContextAccessor IHttpContextAccessor
+@{ 
+    int count = 0;
+    List<Products> products = IHttpContextAccessor.HttpContext.Session.Get<List<Products>>("products");
+    if (products == null)
+    {
+        products = new List<Products>();
+    }
+    count = products.Count();
+}
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -29,6 +41,9 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="Admin" asp-controller="Product" asp-action="Index">Products</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="Customer" asp-controller="Home" asp-action="cart">Cart(@count)</a>
                         </li>
                     </ul>
                 </div>
