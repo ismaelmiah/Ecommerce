@@ -67,7 +67,7 @@ namespace Online_Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult removecart(int? id)
+        public IActionResult Removecart(int? id)
         {
             List<Products> products = HttpContext.Session.Get<List<Products>>("products");
             if (products != null)
@@ -84,7 +84,7 @@ namespace Online_Shop.Controllers
 
 
         [HttpGet]
-        public IActionResult removetocart(int? id)
+        public IActionResult Removetocart(int? id)
         {
             List<Products> products = HttpContext.Session.Get<List<Products>>("products");
             if (products != null)
@@ -101,7 +101,7 @@ namespace Online_Shop.Controllers
 
 
         [HttpGet]
-        public IActionResult cart(int? id)
+        public IActionResult Cart()
         {
             List<Products> products = HttpContext.Session.Get<List<Products>>("products");
             if (products == null)

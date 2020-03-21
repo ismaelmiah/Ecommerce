@@ -41,11 +41,11 @@
 
 <div class="row">
     <div class="col-6">
-        <a asp-action="Index" asp-controller="Home" class="btn btn-success">Back To Home</a>
+        <a asp-action="Index" asp-controller="Home" class="btn btn-info">Back To Home</a>
     </div>
     <div class="col-6 text-right">
         <h3>Total Price: </h3>
         <h3>Grant Total: @Model.Sum(x=>x.Price)</h3>
-        <a asp-action="Index" asp-controller="Home" class="btn btn-success">Place Order</a>
+        <a asp-area="Customer" asp-action="Checkout" asp-controller="Orders" class="btn btn-success">Process To Checkout</a>
     </div>
 </div>
