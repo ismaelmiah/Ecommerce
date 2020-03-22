@@ -153,8 +153,6 @@ C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Cust
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\_ViewImports.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\_ViewStart.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\ProductTypes\Index.cshtml.g.cs
-C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Online Shop.MvcApplicationPartsAssemblyInfo.cs
-C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Online Shop.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewImports.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\_ViewStart.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admin\Views\ProductTypes\Create.cshtml.g.cs
@@ -174,3 +172,8 @@ C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Admi
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\Details.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Home\Cart.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\Orders\Checkout.cshtml.g.cs
+C:\Users\NOYON\source\repos\Online Shop\bin\Debug\netcoreapp3.1\PageList.dll
+C:\Users\NOYON\source\repos\Online Shop\bin\Debug\netcoreapp3.1\cloudscribe.Pagination.Models.dll
+C:\Users\NOYON\source\repos\Online Shop\bin\Debug\netcoreapp3.1\cloudscribe.Web.Pagination.dll
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Online Shop.MvcApplicationPartsAssemblyInfo.cs
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Online Shop.MvcApplicationPartsAssemblyInfo.cache

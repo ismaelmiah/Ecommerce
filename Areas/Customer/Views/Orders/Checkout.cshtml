@@ -58,7 +58,7 @@
                     <label asp-for="OrderDate"></label>
                 </div>
                 <div class="col-8">
-                    <input asp-for="OrderDate" class="form-control" />
+                    <input asp-for="OrderDate" type="text" readonly="readonly" class="form-control" />
                 </div>
             </div>
         </div>
@@ -95,4 +95,9 @@
 </form>
 @section Scripts{
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial.cshtml");}
+<script>
+    $(document).ready(function () {
+        $("#OrderDate").datepicker();
+    });
+</script>
 }

@@ -14,7 +14,7 @@
                         <label style="font-size:23px; color: steelblue">@item.Name</label>
                     </h4>
                 </div>
-                <img src="~/images/@item.Image" alt="Card Image" class="card-img-top" style="height:200px"/>
+                <img src="~/images/@item.Image" alt="Card Image" class="card-img-top" style="height:200px" />
                 <div class="card-header">
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="btn-group">
@@ -26,4 +26,20 @@
             </div>
         </div>
     }
+</div>
+
+<div class="row">
+    <cs-pager 
+        cs-paging-pagenumber="4"
+        cs-paging-totalitems="4"
+        cs-paging-pagesize="1"
+        cs-pagenumber-param="pagenumber"
+        asp-action="Index"
+        asp-controller="Home"
+        cs-pager-li-current-class="page-item active"
+        cs-pager-li-other-class="page-item"
+        cs-pager-li-non-active-class="page-itme disable"
+        cs-pager-link-current-class="page-link"
+        cs-pager-link-other-class="page-link"
+    ></cs-pager>
 </div>

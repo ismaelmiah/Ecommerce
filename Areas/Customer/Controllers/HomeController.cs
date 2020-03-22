@@ -23,9 +23,10 @@ namespace Online_Shop.Controllers
             _db = db;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int pagenumber, int pagesize)
         {
-            var data = _db.Product.Include(x => x.ProductTypes).Include(x => x.SpecialTags).ToList();
+            int ExcludeRecords = (pagesize * pagenumber) - pagesize;
+            var data = _db.Product.Include(x => x.ProductTypes).Include(x => x.SpecialTags).ToList().Skip(ExcludeRecords).Take(pagesize);
             return View(data);
         }
 
