@@ -70,6 +70,7 @@ namespace Online_Shop
 
             app.UseSession();
 
+
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
@@ -78,6 +79,9 @@ namespace Online_Shop
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+                endpoints.MapControllers();
+                endpoints.MapRazorPages();
             });
 
         }

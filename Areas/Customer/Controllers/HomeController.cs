@@ -9,6 +9,7 @@ using Microsoft.Extensions.Logging;
 using Online_Shop.Data;
 using Online_Shop.Models;
 using Online_Shop.Utility;
+using cloudscribe.Pagination.Models;
 
 namespace Online_Shop.Controllers
 {
@@ -23,11 +24,12 @@ namespace Online_Shop.Controllers
             _db = db;
         }
 
-        public IActionResult Index(int pagenumber, int pagesize)
+        public IActionResult Index(int pagenumber=1, int pagesize=4)
         {
             int ExcludeRecords = (pagesize * pagenumber) - pagesize;
-            var data = _db.Product.Include(x => x.ProductTypes).Include(x => x.SpecialTags).ToList().Skip(ExcludeRecords).Take(pagesize);
-            return View(data);
+            var data = _db.Product.Include(x => x.ProductTypes).Include(x => x.SpecialTags).Skip(ExcludeRecords).Take(pagesize);
+
+            return View(data.ToList());
         }
 
         //Details Page

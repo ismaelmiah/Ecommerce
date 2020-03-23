@@ -1,5 +1,5 @@
 ﻿@using Online_Shop.Models
-@model List<Products>
+@model IEnumerable<Products>
 @{
     ViewData["Title"] = "Home Page";
 }
@@ -30,7 +30,7 @@
 
 <div class="row">
     <cs-pager 
-        cs-paging-pagenumber="4"
+        cs-paging-pagenumber="1"
         cs-paging-totalitems="4"
         cs-paging-pagesize="1"
         cs-pagenumber-param="pagenumber"
