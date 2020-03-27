@@ -18,5 +18,6 @@ namespace Online_Shop.Data
         public DbSet<Products> Product { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderDetails> OrderDetails { get; set; }
+        public DbSet<ApplicationUser> ApplicationUsers { get; set; }
     }
 }
