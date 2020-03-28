@@ -1,0 +1,47 @@
+﻿
+@{
+    ViewData["Title"] = "Index";
+}
+<br />
+<div class="row">
+    <div class="col-6">
+        <h1 class="text-info">Product List</h1>
+    </div>
+</div>
+
+<div>
+    <table class="table table-striped border" id="DT_load">
+        <thead>
+            <tr class="table-info">
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+
+        <tbody>
+            
+        </tbody>
+
+    </table>
+</div>
+
+@section Scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#DT_load').DataTable();
+        });
+        $(function () {
+            var save = '@TempData["save"]'
+            if (save != null && save != '') {
+                if (save == "Delete") {
+                    alertify.error('Product Type has been Deleted');
+                }
+                else if (save == "Update") {
+                    alertify.warning('Product Type has been Updated');
+                }
+                else alertify.success(save);
+            }
+
+        })
+    </script>
+}
