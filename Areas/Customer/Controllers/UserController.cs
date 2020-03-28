@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Online_Shop.Data;
 using Online_Shop.Models;
 
 namespace Online_Shop.Areas.Customer.Controllers
@@ -12,13 +13,15 @@ namespace Online_Shop.Areas.Customer.Controllers
     public class UserController : Controller
     {
         UserManager<IdentityUser> _userManager;
-        public UserController(UserManager<IdentityUser>userManager)
+        private readonly ApplicationDbContext _db;
+        public UserController(UserManager<IdentityUser>userManager, ApplicationDbContext db)
         {
             _userManager = userManager;
+            _db = db;
         }
         public IActionResult Index()
         {
-            return View();
+            return View(_db.ApplicationUsers.ToList());
         }
 
         [HttpGet]

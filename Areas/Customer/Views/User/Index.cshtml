@@ -1,11 +1,15 @@
-﻿
+﻿@using Online_Shop.Models
+@model IEnumerable<ApplicationUser>
 @{
     ViewData["Title"] = "Index";
 }
 <br />
 <div class="row">
     <div class="col-6">
-        <h1 class="text-info">Product List</h1>
+        <h1 class="text-info">User List</h1>
+    </div>
+    <div class="col-6 text-right">
+        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i> &nbsp; New User</a>
     </div>
 </div>
 
@@ -13,17 +17,28 @@
     <table class="table table-striped border" id="DT_load">
         <thead>
             <tr class="table-info">
-                <th></th>
+                <th>Name</th>
+                <th>Username</th>
                 <th></th>
             </tr>
         </thead>
 
         <tbody>
-            
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.FirstName @item.LastName</td>
+                    <td>@item.UserName</td>
+                    <td>
+                        <partial name="_ButtonPartial" model="@item.Id" />
+                    </td>
+                </tr>
+            }
         </tbody>
 
     </table>
 </div>
+
 
 @section Scripts{
     <script type="text/javascript">
