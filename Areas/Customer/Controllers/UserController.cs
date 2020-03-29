@@ -25,28 +25,53 @@ namespace Online_Shop.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> Create()
+        public IActionResult Create(string? id)
         {
-            return View();
+            if (id == null)
+            {
+                // Create
+                return View(new ApplicationUser());
+            }
+            //Update
+            var _user = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
+            if (_user == null)
+            {
+                return NotFound();
+            }
+
+            return View(_user);
         }
-        
+
+
         [HttpPost]
         public async Task<IActionResult> Create(ApplicationUser user)
         {
             if (ModelState.IsValid)
             {
-                var result = await _userManager.CreateAsync(user, user.PasswordHash);
-                if (result.Succeeded)
+                var _user = _db.ApplicationUsers.FirstOrDefault(x => x.Id == user.Id);
+                if (_user == null)
                 {
-                    TempData["save"] = "User has been Registered Successfully";
-                    return RedirectToAction(nameof(Index));
+                    var result = await _userManager.CreateAsync(user, user.PasswordHash);
+                    if (result.Succeeded)
+                    {
+                        TempData["save"] = "User has been Registered Successfully";
+                    }
+                    foreach (var error in result.Errors)
+                    {
+                        ModelState.AddModelError(string.Empty, error.Description);
+                    }
                 }
-
-                foreach (var error in result.Errors)
+                else
                 {
-                    ModelState.AddModelError(string.Empty, error.Description);
+                    _user.FirstName = user.FirstName;
+                    _user.LastName = user.LastName;
+                    var res = await _userManager.UpdateAsync(_user);
+                    if (res.Succeeded)
+                    {
+                        TempData["save"] = "Update";
+                    }
                 }
-
+                return RedirectToAction(nameof(Index));
             }
             return View();
         }

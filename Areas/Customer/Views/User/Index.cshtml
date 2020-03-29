@@ -20,6 +20,7 @@
                 <th>Name</th>
                 <th>Username</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
 
@@ -30,7 +31,7 @@
                     <td>@item.FirstName @item.LastName</td>
                     <td>@item.UserName</td>
                     <td>
-                        <partial name="_ButtonPartial" model="@item.Id" />
+                        <partial name="_ButtonPartialForUser" model="@item.Id" />
                     </td>
                 </tr>
             }
@@ -49,10 +50,10 @@
             var save = '@TempData["save"]'
             if (save != null && save != '') {
                 if (save == "Delete") {
-                    alertify.error('Product Type has been Deleted');
+                    alertify.error('User has been Deleted');
                 }
                 else if (save == "Update") {
-                    alertify.warning('Product Type has been Updated');
+                    alertify.warning('User has been Updated');
                 }
                 else alertify.success(save);
             }
