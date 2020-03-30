@@ -25,21 +25,20 @@ namespace Online_Shop.Areas.Customer.Controllers
         }
 
         [HttpGet]
-        public IActionResult Create(string? id)
+        public IActionResult Details(string id)
         {
-            if (id == null)
-            {
-                // Create
-                return View(new ApplicationUser());
-            }
-            //Update
-            var _user = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
-            if (_user == null)
+            var result = _db.ApplicationUsers.FirstOrDefault(x=>x.Id==id);
+            if (result == null)
             {
                 return NotFound();
             }
+            return View(result);
+        }
 
-            return View(_user);
+        [HttpGet]
+        public IActionResult Create()
+        {
+            return View(new ApplicationUser());
         }
 
 
@@ -48,9 +47,6 @@ namespace Online_Shop.Areas.Customer.Controllers
         {
             if (ModelState.IsValid)
             {
-                var _user = _db.ApplicationUsers.FirstOrDefault(x => x.Id == user.Id);
-                if (_user == null)
-                {
                     var result = await _userManager.CreateAsync(user, user.PasswordHash);
                     if (result.Succeeded)
                     {
@@ -60,16 +56,70 @@ namespace Online_Shop.Areas.Customer.Controllers
                     {
                         ModelState.AddModelError(string.Empty, error.Description);
                     }
-                }
-                else
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Lockout(string id)
+        {
+
+            var result = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return View(result);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Lockout(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _db.ApplicationUsers.FirstOrDefault(x => x.Id == user.Id);
+                if (result == null)
                 {
-                    _user.FirstName = user.FirstName;
-                    _user.LastName = user.LastName;
-                    var res = await _userManager.UpdateAsync(_user);
-                    if (res.Succeeded)
-                    {
-                        TempData["save"] = "Update";
-                    }
+                    return NotFound();
+                }
+                result.LockoutEnd = DateTime.Now.AddDays(100);
+                int rowAffected = await _db.SaveChangesAsync();
+                if (rowAffected>0)
+                {
+                    TempData["save"] = "User has been Locked Out Successfully";
+                    return RedirectToAction(nameof(Index));
+                }
+        
+            }
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult Edit(string id)
+        {
+            var _user = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
+            if (_user == null)
+            {
+                return NotFound();
+            }
+            return View(_user);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var _user = _db.ApplicationUsers.FirstOrDefault(x => x.Id == user.Id);
+                _user.FirstName = user.FirstName;
+                _user.LastName = user.LastName;
+                _user.PasswordHash = user.PasswordHash;
+                var res = await _userManager.UpdateAsync(_user);
+                if (res.Succeeded)
+                {
+                    TempData["save"] = "Update";
                 }
                 return RedirectToAction(nameof(Index));
             }

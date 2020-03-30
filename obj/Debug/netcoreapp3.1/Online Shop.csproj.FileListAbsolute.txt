@@ -216,3 +216,6 @@ C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Cust
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Index.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ButtonPartial.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Views\Shared\_ButtonPartialForUser.cshtml.g.cs
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Edit.cshtml.g.cs
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Details.cshtml.g.cs
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Lockout.cshtml.g.cs
