@@ -25,6 +25,37 @@ namespace Online_Shop.Areas.Customer.Controllers
         }
 
         [HttpGet]
+        public IActionResult Active(string id)
+        {
+            var result = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return View(result);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Active(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _db.ApplicationUsers.FirstOrDefault(x => x.Id == user.Id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                result.LockoutEnd = DateTime.Now.AddDays(-1);
+                int rowAffected = await _db.SaveChangesAsync();
+                if (rowAffected > 0)
+                {
+                    TempData["save"] = "User has been Active Successfully";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View();
+        }
+        [HttpGet]
         public IActionResult Details(string id)
         {
             var result = _db.ApplicationUsers.FirstOrDefault(x=>x.Id==id);
@@ -60,6 +91,39 @@ namespace Online_Shop.Areas.Customer.Controllers
             }
             return View();
         }
+        
+        [HttpGet]
+        public IActionResult Delete(string id)
+        {
+            var result = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
+            if (result == null)
+            {
+                return NotFound();
+            }
+            return View(result);
+        }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(ApplicationUser user)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = _db.ApplicationUsers.FirstOrDefault(x => x.Id == user.Id);
+                if (result == null)
+                {
+                    return NotFound();
+                }
+                _db.ApplicationUsers.Remove(result);
+                int rowAffected = await _db.SaveChangesAsync();
+                if (rowAffected > 0)
+                {
+                    TempData["save"] = "Delete";
+                    return RedirectToAction(nameof(Index));
+                }
+            }
+            return View();
+        }
 
         [HttpGet]
         public IActionResult Lockout(string id)
@@ -91,7 +155,6 @@ namespace Online_Shop.Areas.Customer.Controllers
                     TempData["save"] = "User has been Locked Out Successfully";
                     return RedirectToAction(nameof(Index));
                 }
-        
             }
             return View();
         }

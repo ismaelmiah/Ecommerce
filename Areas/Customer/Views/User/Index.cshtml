@@ -19,6 +19,7 @@
             <tr class="table-info">
                 <th>Name</th>
                 <th>Username</th>
+                <th>Status</th>
                 <th></th>
                 <th></th>
             </tr>
@@ -27,13 +28,26 @@
         <tbody>
             @foreach (var item in Model)
             {
-                <tr>
-                    <td>@item.FirstName @item.LastName</td>
-                    <td>@item.UserName</td>
+            <tr>
+                <td>@item.FirstName @item.LastName</td>
+                <td>@item.UserName</td>
+                @if (item.LockoutEnd > DateTime.Now && item.LockoutEnd != null)
+                {
+                    <td>Inactive</td>
+                    <td></td>
+                    <td class="btn-group">
+                        <a asp-action="Active" asp-route-id="@item.Id" class="btn btn-primary"><i class="fas fa-edit"></i></a>
+                        <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
+                    </td>
+                }
+                else
+                {
+                    <td>Active</td>
                     <td>
                         <partial name="_ButtonPartialForUser" model="@item.Id" />
                     </td>
-                </tr>
+                }
+            </tr>
             }
         </tbody>
 
@@ -50,10 +64,10 @@
             var save = '@TempData["save"]'
             if (save != null && save != '') {
                 if (save == "Delete") {
-                    alertify.error('User has been Deleted');
+                    alertify.error('User has been Deleted Successfully');
                 }
                 else if (save == "Update") {
-                    alertify.warning('User has been Updated');
+                    alertify.warning('User has been Updated Successfully');
                 }
                 else alertify.success(save);
             }

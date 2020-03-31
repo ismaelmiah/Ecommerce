@@ -219,3 +219,5 @@ C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Views\Shar
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Edit.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Details.cshtml.g.cs
 C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Lockout.cshtml.g.cs
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Active.cshtml.g.cs
+C:\Users\NOYON\source\repos\Online Shop\obj\Debug\netcoreapp3.1\Razor\Areas\Customer\Views\User\Delete.cshtml.g.cs
