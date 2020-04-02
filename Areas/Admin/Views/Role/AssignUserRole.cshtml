@@ -4,10 +4,7 @@
 <br />
 <div class="row">
     <div class="col-6">
-        <h1 class="text-info">Role List</h1>
-    </div>
-    <div class="col-6 text-right">
-        <a asp-action="Create" class="btn btn-info"><i class="fas fa-plus"></i> &nbsp; New Role</a>
+        <h1 class="text-info">User Roles</h1>
     </div>
 </div>
 
@@ -15,22 +12,18 @@
     <table class="table table-striped border" id="DT_load">
         <thead>
             <tr class="table-info">
-                <th>Name</th>
+                <th>User Name</th>
+                <th>Roles</th>
                 <th></th>
             </tr>
         </thead>
 
         <tbody>
-            @foreach (var item in ViewBag.Role)
+            @foreach (var item in ViewBag.UserRoles)
             {
                 <tr>
-                    <td>@item.Name</td>
-                    <td style="width: 150px">
-                        <div class="btn-group">
-                            <a asp-action="Edit" asp-route-id="@item.Id" class="btn btn-primary"><i class="fas fa-edit"></i></a>
-                            <a asp-action="Delete" asp-route-id="@item.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a>
-                        </div>
-                    </td>
+                    <td>@item.UserName</td>
+                    <td>@item.RoleName</td>
                 </tr>
             }
         </tbody>
