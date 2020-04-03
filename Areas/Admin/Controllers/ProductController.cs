@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -14,6 +15,8 @@ using Online_Shop.Models;
 namespace Online_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
+    [Authorize]
     public class ProductController : Controller
     {
         private readonly ApplicationDbContext _db;

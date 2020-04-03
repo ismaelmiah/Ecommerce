@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Online_Shop.Data;
 using Online_Shop.Models;
@@ -9,6 +10,8 @@ using Online_Shop.Models;
 namespace Online_Shop.Areas.Admin.Controllers
 {
     [Area("Admin")]
+
+    [Authorize]
     public class ProductTypesController : Controller
     {
         private readonly ApplicationDbContext _db;

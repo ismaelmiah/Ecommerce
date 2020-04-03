@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Online_Shop.Data;
@@ -19,12 +20,16 @@ namespace Online_Shop.Areas.Customer.Controllers
             _userManager = userManager;
             _db = db;
         }
+
+        [Authorize]
         public IActionResult Index()
         {
             return View(_db.ApplicationUsers.ToList());
         }
 
         [HttpGet]
+
+        [Authorize]
         public IActionResult Active(string id)
         {
             var result = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
@@ -36,6 +41,7 @@ namespace Online_Shop.Areas.Customer.Controllers
         }
 
         [HttpPost]
+
         public async Task<IActionResult> Active(ApplicationUser user)
         {
             if (ModelState.IsValid)
@@ -56,6 +62,8 @@ namespace Online_Shop.Areas.Customer.Controllers
             return View();
         }
         [HttpGet]
+
+        [Authorize]
         public IActionResult Details(string id)
         {
             var result = _db.ApplicationUsers.FirstOrDefault(x=>x.Id==id);
@@ -81,6 +89,7 @@ namespace Online_Shop.Areas.Customer.Controllers
                     var result = await _userManager.CreateAsync(user, user.PasswordHash);
                     if (result.Succeeded)
                     {
+                        var isSaveRole = await _userManager.AddToRoleAsync(user, "User");
                         TempData["save"] = "User has been Registered Successfully";
                     }
                     foreach (var error in result.Errors)
@@ -93,6 +102,8 @@ namespace Online_Shop.Areas.Customer.Controllers
         }
         
         [HttpGet]
+
+        [Authorize]
         public IActionResult Delete(string id)
         {
             var result = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
@@ -126,6 +137,8 @@ namespace Online_Shop.Areas.Customer.Controllers
         }
 
         [HttpGet]
+
+        [Authorize]
         public IActionResult Lockout(string id)
         {
 
@@ -160,6 +173,8 @@ namespace Online_Shop.Areas.Customer.Controllers
         }
 
         [HttpGet]
+
+        [Authorize]
         public IActionResult Edit(string id)
         {
             var _user = _db.ApplicationUsers.FirstOrDefault(x => x.Id == id);
